@@ -81,8 +81,8 @@
             guac.disconnect();
         }
 
-            < !--console.log(guac); -->
-    < !--console.log(tunnel); -->
+    //         < !--console.log(guac); -->
+    // < !--console.log(tunnel); -->
             guac.onclipboard = function(stream, mimetype) {
                 var f;
                 if (/^text\//.exec(mimetype)) {
@@ -96,21 +96,21 @@
                     }
                 }
             }
-    < !--function rescale(browserDisp, guacDisp) {
-        -->
-        < !--var scale = Math.min(browserDisp.offsetWidth / Math.max(guacDisp.getWidth(), 1), -->
-        < !--browserDisp.offsetHeight / Math.max(guacDisp.getHeight(), 1)); -->
-        < !--guacDisp.scale(scale); -->
-    < !--}-->
-    < !--guac.onresize = function(width, height) {
-        -->
-        < !--console.log(width, height); -->
-    < !--} -->
-    < !--var guacDisplay = guac.getDisplay(); -->
-    < !--window.onresize = function(event) {
-        -->
-        < !--rescale(display, guacDisplay); -->
-    < !--}; -->
+    // < !--function rescale(browserDisp, guacDisp) {
+    //     -->
+    //     < !--var scale = Math.min(browserDisp.offsetWidth / Math.max(guacDisp.getWidth(), 1), -->
+    //     < !--browserDisp.offsetHeight / Math.max(guacDisp.getHeight(), 1)); -->
+    //     < !--guacDisp.scale(scale); -->
+    // < !--}-->
+    // < !--guac.onresize = function(width, height) {
+    //     -->
+    //     < !--console.log(width, height); -->
+    // < !--} -->
+    // < !--var guacDisplay = guac.getDisplay(); -->
+    // < !--window.onresize = function(event) {
+    //     -->
+    //     < !--rescale(display, guacDisplay); -->
+    // < !--}; -->
             //state change
             guac.onstatechange = function(state) {
                 if (state == 5) {
@@ -142,9 +142,9 @@
                     guac.sendSize(window.innerWidth - 10, window.innerHeight - 60);
                     $(window).resize(function () {
                         guac.sendSize(window.innerWidth - 10, window.innerHeight - 60);
-                < !--var guacDisplay = guac.getDisplay()-- >
-                < !--guacDisplay.resize(guacDisplay.getDefaultLayer(), window.innerWidth - 10, window.innerHeight - 40) -->
-                < !--rescale(display, guacDisplay); -->
+                // < !--var guacDisplay = guac.getDisplay()-- >
+                // < !--guacDisplay.resize(guacDisplay.getDefaultLayer(), window.innerWidth - 10, window.innerHeight - 40) -->
+                // < !--rescale(display, guacDisplay); -->
             });
                 }
             }
@@ -194,8 +194,8 @@
                 confirmButtonText: 'copy to clipboard',
                 inputValue: data,
                 cancelButtonText: 'send data',
-          < !--showCancelButton: true, -->
-          < !--cancelButtonColor: '#d33', -->
+        //   < !--showCancelButton: true, -->
+        //   < !--cancelButtonColor: '#d33', -->
         }).then(function (result) {
                     if (result.value) {
                         var data = result.value;
