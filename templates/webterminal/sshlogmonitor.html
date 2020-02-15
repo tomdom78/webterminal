@@ -1,13 +1,17 @@
 <html>
+
 <head>
     <style>
-      body { background-color: #666; }
+        body {
+            background-color: #666;
+        }
     </style>
-{% load staticfiles %}
-{%load i18n%}
-<!--termianl css-->
-<link rel="stylesheet" href="{% static 'plugins/xterm/xterm.css' %}"/>
+    {% load staticfiles %}
+    {%load i18n%}
+    <!--termianl css-->
+    <link rel="stylesheet" href="{% static 'plugins/xterm/xterm.css' %}" />
 </head>
+
 <body>
     <div id="terminal_monitor"> </div>
 </body>
@@ -41,7 +45,7 @@
             return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
         }
         $.ajaxSetup({
-            beforeSend: function(xhr, settings) {
+            beforeSend: function (xhr, settings) {
                 if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
                     xhr.setRequestHeader("X-CSRFToken", csrftoken);
                 }
@@ -49,7 +53,7 @@
         });
         var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
         var ws_path = ws_scheme + '://' + window.location.host + '/monitor/' + 'monitor-' + '{{object.log}}';
-        make_terminal(document.getElementById('terminal_monitor'), {rows: {{object.height}}, cols: {{object.width}}}, ws_path);
+        make_terminal(document.getElementById('terminal_monitor'), { rows: {{ object.height }}, cols: {{ object.width }}}, ws_path);
     })
     function make_terminal(element, size, ws_url) {
         Terminal.applyAddon(fullscreen);
@@ -66,50 +70,36 @@
         var ws = new WebSocket(ws_url);
         ws.onopen = function (event) {
             //set terminal width and height
-            <!--term.fit();-->
-            term.resize(term.cols, term.rows);
-            <!--term.on('data', function (data) {-->
-                <!--<!--console.log(data);-->-->
-                <!--ws.send(JSON.stringify(['stdin', data]));-->
-            <!--});-->
+            < !--term.fit(); -->
+                term.resize(term.cols, term.rows);
+            < !--term.on('data', function (data) {
+                -->
+                < !--< !--console.log(data); --> -->
+                < !--ws.send(JSON.stringify(['stdin', data])); -->
+            < !--}); -->
 
-            <!--term.on('title', function (title) {-->
-                <!--document.title = title;-->
-            <!--});-->
+            < !--term.on('title', function (title) {
+                -->
+                < !--document.title = title; -->
+            < !--}); -->
 
-            //term.toggleFullscreen(true);
-            ws.onmessage = function (event) {
-                json_msg = JSON.parse(event.data);
-                switch (json_msg[0]) {
-                    case "stdout":
-                        term.write(json_msg[1]);
-                        break;
-                    case "disconnect":
-                        term.write("{% trans '\r\n\r\n[Finished...]\r\n' %}");
-                        break;
-                }
-            };
+                //term.toggleFullscreen(true);
+                ws.onmessage = function (event) {
+                    json_msg = JSON.parse(event.data);
+                    switch (json_msg[0]) {
+                        case "stdout":
+                            term.write(json_msg[1]);
+                            break;
+                        case "disconnect":
+                            term.write("{% trans '\r\n\r\n[Finished...]\r\n' %}");
+                            break;
+                    }
+                };
         };
-        return {socket: ws, term: term};
+        return { socket: ws, term: term };
     }
 </script>
 
-
-<!-- Matomo -->
-<script type="text/javascript">
-  var _paq = window._paq || [];
-  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u="//193.112.194.114:8002/";
-    _paq.push(['setTrackerUrl', u+'matomo.php']);
-    _paq.push(['setSiteId', '1']);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-  })();
-</script>
-<!-- End Matomo Code -->
 
 
 </html>
